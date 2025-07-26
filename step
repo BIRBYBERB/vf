@@ -1,0 +1,84 @@
+// In Step Event
+
+if (state == "auto_move") {
+    if (frame <= duration) {
+        x = lerp(start_x, end_x, frame / duration);
+        frame++;
+    } else {
+        audio_play_sound(LebenonJOrder, 1, false);
+        state = "wait_choice";
+    }
+}
+
+else if (state == "wait_choice") {
+	
+	//Modified Conditions
+	
+	if (global.topics == global.topics[$ "Accept"]) {
+		global.score += 100; 
+        audio_play_sound(Prowler, 1, false); 
+        wait_timer = 60; 
+        state = "wait_c";
+	}
+	
+	//Original conditions
+	
+    //if (keyboard_check_pressed(ord("A"))) {
+        //global.score += 100; // ✅ Good response!
+        //audio_play_sound(Prowler, 1, false); // 🔊 your choice sound
+        //wait_timer = 60; // ⏳ wait 1 second
+        //state = "wait_c";
+
+        //global.drag_enabled = true; // ✅ Allow dragging now!
+    //}
+    //else if (keyboard_check_pressed(ord("B"))) {
+        //global.score -= 50; // ❌ Rude response!
+        //audio_play_sound(GETOUT, 1, false); // 🔊 your angry sound
+        //wait_timer = 180; // ⏳ wait 1.5 seconds
+        //state = "wait_b";
+    //}
+}
+
+// ⏳ Wait before move_a
+else if (state == "wait_a") {
+    wait_timer--;
+    if (wait_timer <= 0) {
+        frame = 0;
+        start_x = x;
+        end_x = x - 960;
+        duration = 120;
+		audio_play_sound(Prowler, 1, false); // 🔊 your choice sound
+        state = "move_a";
+    }
+}
+
+// ⏳ Wait before move_b
+else if (state == "wait_b") {
+    wait_timer--;
+    if (wait_timer <= 0) {
+        frame = 0;
+        start_x = x;
+        end_x = x + 1120;
+        duration = 180;
+        state = "move_b";
+    }
+}
+
+// ⏳ Wait before move_b
+else if (state == "wait_c") {
+    wait_timer--;
+    if (wait_timer <= 0) {
+		
+    }
+}
+
+// 🚶 Movement animations
+else if (state == "move_a" || state == "move_b") {
+    if (frame <= duration) {
+        x = lerp(start_x, end_x, frame / duration);
+        frame++;
+    } else {
+        // state = "done";
+    }
+}
+
