@@ -1,0 +1,25 @@
+global.topics = {};
+global.topicOption = 0;
+
+global.topics[$ "Example"] = [
+	SPEAKER("Lebron"),
+	CHOICE("May I order a ball size coffee?",
+		OPTION("Of course.","Accept"),
+		OPTION("Sorry, we can't serve you.","Decline")) 
+];
+
+global.topics[$ "Accept"] = [
+	SPEAKER("PLAYER"),
+	TEXT("Coming right up, sire! Please wait a moment!"),
+	GOTO("ENDCONVO")
+];
+
+global.topics[$ "Decline"] = [
+	SPEAKER("PLAYER"),
+	TEXT("Sorry, sir. The door's that way."),
+	GOTO("ENDCONVO")
+];
+
+global.topics[$ "ENDCONVO"] = [
+	TEXT("Placeholder"),
+];
