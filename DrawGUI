@@ -1,0 +1,8 @@
+if (state != "wait_choice") {
+    // do nothing — GUI stays invisible
+    exit;
+}
+
+startDialogue("Example");
+
+//For some reason loops? It should stop when all options for a dialogue is exhausted. Maybe it's because it's at a constant wait-choice state?
